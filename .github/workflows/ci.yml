@@ -1,0 +1,11 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Slow on purpose, so ShipClear's review finishes while CI is still running.
+      - run: sleep 150
+      # Create a file named ci-should-fail on the branch to make this check fail.
+      - run: test ! -f ci-should-fail
