@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Returns an order by id.
 router.get("/orders/:id", async (req, res) => {
-  const rows = await db.query("SELECT * FROM orders WHERE id = " + req.params.id);
+  const rows = await db.query("SELECT * FROM orders WHERE id = $1", [req.params.id]);
   res.json(rows[0]);
 });
 
@@ -22,3 +22,4 @@ module.exports = router;
 
 // second commit: triggers a new review run
 // third commit: race test
+
